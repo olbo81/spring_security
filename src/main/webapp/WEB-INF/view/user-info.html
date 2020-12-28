@@ -10,9 +10,10 @@
     <h2>User Info</h2>
     <br>
 
-    <form action="#" th:action="@{saveUser}" th:object="${user}">
+    <form th:action="@{/saveUser}" th:object="${user}">
 
-        <form hidden th:field="*{id}"/>
+
+        <input type="hidden" th:field="*{id}"/>
         Name <input type="text" th:field="*{name}"/>
         <br><br>
         Surname <input type="text" th:field="*{surname}"/>
@@ -21,11 +22,11 @@
         <br><br>
         Email <input type="text" th:field="*{email}"/>
         <br><br>
-        <input type="submit" value="OK">
-
+       <!-- <input type="submit" value="OK">-->
+        <button type="submit" class="btn btn-success">Ok</button>
 
     </form>
-
+    </form>
 </div>
 </body>
 </html>
