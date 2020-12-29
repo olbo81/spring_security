@@ -69,7 +69,7 @@ public class Config implements WebMvcConfigurer {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
         try {
             dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
-            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/my_db?serverTimezone=Asia/Yekaterinburg");
+            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/security_shema?serverTimezone=Asia/Yekaterinburg");
             dataSource.setUser("root");
             dataSource.setPassword("root");
         } catch (PropertyVetoException e) {

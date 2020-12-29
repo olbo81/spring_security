@@ -13,6 +13,8 @@
             <th>Surname</th>
             <th>Phone</th>
             <th>Email</th>
+            <th>Username</th>
+            <th>Password</th>
             <th>Operations</th>
         </tr>
 
@@ -21,6 +23,8 @@
             <td th:utext="${user.surname}">surname</td>
             <td th:utext="${user.phone}">phone</td>
             <td th:utext="${user.email}">email</td>
+            <td th:utext="${user.username}">email</td>
+            <td th:utext="${user.password}">email</td>
             <td>
                 <input type="button" value="Update"
                        th:onclick="'window.location.href = \'' + @{/updateInfo/{id} (id =${user.id})} + '\''"/>
