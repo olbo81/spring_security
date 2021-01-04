@@ -6,6 +6,14 @@
 </head>
 <body>
 
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
+
+<br/>
+
+<h1>Admin</h1>
+
 <div>
     <table border="1" style="width:500px">
         <tr>
@@ -13,7 +21,6 @@
             <th>Surname</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>Username</th>
             <th>Password</th>
             <th>Operations</th>
         </tr>
@@ -23,7 +30,6 @@
             <td th:utext="${user.surname}">surname</td>
             <td th:utext="${user.phone}">phone</td>
             <td th:utext="${user.email}">email</td>
-            <td th:utext="${user.username}">email</td>
             <td th:utext="${user.password}">email</td>
             <td>
                 <input type="button" value="Update"
