@@ -1,6 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="crud2:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/crud2_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/crud2</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>crud2</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -46,7 +53,13 @@
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-entitymanager:5.4.25.Final" />
           <element id="library" level="project" name="Maven: com.mchange:c3p0:0.9.5.2" />
           <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.11" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:5.4.2" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:5.4.2" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:5.4.2" />
         </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/crud2/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="crud2/web/Web" />
     </root>
