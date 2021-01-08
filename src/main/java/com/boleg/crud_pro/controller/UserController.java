@@ -7,49 +7,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.security.Principal;
+
+//Контроллер для всех залогиненных пользователей (страница all)
 
 @Controller
-
+@RequestMapping("/all")
 public class UserController {
 
-    private final UserService userService;
+    private UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @RequestMapping("/")
-    public String showAllUsers(Model model) {
-        List<User> allUsers = userService.getAllUsers();
-        model.addAttribute("allUsers", allUsers);
-        return "all-users";
-    }
-
-    @RequestMapping("/addNewUser")
-    public String addNewUser(Model model) {
-        User user = new User();
+    @GetMapping
+    public String user(Principal principal, Model model) {
+        String email = principal.getName();
+        User user = userService.getByEmail(email);
         model.addAttribute("user", user);
-        return "user-info";
-    }
-
-    @RequestMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
-        return "redirect:/";
-    }
-
-    @RequestMapping("/updateInfo/{id}")
-    public String updateUser(@PathVariable("id") int id, Model model) {
-        User user = userService.getUser(id);
-        model.addAttribute("user", user);
-        return "user-info";
-    }
-
-    @RequestMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
-        userService.deleteUser(id);
-        return "redirect:/";
+        return "one-user";
     }
 }
