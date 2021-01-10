@@ -14,5 +14,4 @@ public interface RoleDAO {
     public Role getById(int id);
 
     public Role getByRoleName(String roleName);
-
 }

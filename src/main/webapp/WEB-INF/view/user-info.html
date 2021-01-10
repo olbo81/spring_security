@@ -25,6 +25,16 @@
         Password <input type="text" th:field="*{password}"/>
         <br><br>
 
+        <select multiple size="2" name="rolesNames" th:required="true">
+            <option value=""> - Select role - </option>
+            <option
+                    th:each="role : ${rolesNames}"
+                    th:value="${role.role}"
+                    th:text="${role.role}"
+                    th:selected="${#lists.contains(user.roles, role)}">
+            </option>
+        </select>
+
         <button type="submit" class="btn btn-success">Ok</button>
 
     </form>

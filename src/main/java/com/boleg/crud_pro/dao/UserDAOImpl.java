@@ -29,15 +29,12 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getUser(int id) {
-
-//        User user = entityManager.find(User.class, id);
-//        return user;
-
         TypedQuery<User> query = entityManager.createQuery(
                 "SELECT users FROM User users WHERE users.id = :id", User.class);
         return query
                 .setParameter("id", id)
                 .getSingleResult();
+
     }
 
     @Override
@@ -47,16 +44,11 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getByEmail(String email) {
-
-//        User user = entityManager.find(User.class, email);
-//        return user;
-
         TypedQuery<User> query = entityManager.createQuery(
                 "SELECT user FROM User user WHERE user.email = :name", User.class);
         return query
                 .setParameter("name", email)
                 .getSingleResult();
-
     }
 }
 

@@ -14,9 +14,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+// Клас-контроллер функций администратора
+
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
+
+    //связывание через конструктор с сервисами User и Role
 
     private final UserService userService;
     private final RoleService roleService;
@@ -27,7 +30,6 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-
     @GetMapping
     public String user(Principal principal, Model model) {
         String email = principal.getName();
@@ -37,7 +39,7 @@ public class AdminController {
         return "all-users";
     }
 
-    @RequestMapping("/all")
+    @RequestMapping("/admin")
     public String showAllUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("allUsers", allUsers);
@@ -54,29 +56,24 @@ public class AdminController {
     @RequestMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user, @RequestParam(value = "rolesNames") String[] roles) {
         Set<Role> roleSet = new HashSet<>();
-        for(String roleName : roles) {
+        for (String roleName : roles) {
             roleSet.add(roleService.getByRoleName(roleName));
         }
         user.setRoles(roleSet);
         userService.saveUser(user);
-        return "all-users";
+        return "redirect:/admin";
     }
 
     @RequestMapping("/updateInfo/{id}")
-    public String updateUser(@PathVariable("id") int id, Model model, @RequestParam(value = "rolesNames") String[] roles) {
-        Set<Role> roleSet = new HashSet<>();
-        for(String roleName : roles) {
-            roleSet.add(roleService.getByRoleName(roleName));
-        }
-        User user = userService.getUser(id);
-        user.setRoles(roleSet);
-        model.addAttribute("user", user);
+    public String updateUser(@PathVariable("id") int id, Model model) {
+        model.addAttribute("rolesNames", roleService.getAllRoles());
+        model.addAttribute("user", userService.getUser(id));
         return "user-info";
     }
 
     @RequestMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUser(id);
-        return "all-users";
+        return "redirect:/admin";
     }
 }

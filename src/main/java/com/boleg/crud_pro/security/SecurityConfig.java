@@ -43,10 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").anonymous()
                 // защищенные URL
                 .antMatchers("/admin/**")
-                   //     "/addNewUser/**",
-                   //     "/saveUser/**",
-                   //     "/updateInfo/{id}",
-                   //     "/deleteUser/{id}")
+                //     "/addNewUser/**",
+                //     "/saveUser/**",
+                //     "/updateInfo/{id}",
+                //     "/deleteUser/{id}")
                 .access("hasRole('ADMIN')")
                 .antMatchers("/all").access("hasAnyRole('ADMIN', 'USER')")
                 .anyRequest().authenticated()
