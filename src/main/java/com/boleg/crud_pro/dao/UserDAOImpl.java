@@ -2,12 +2,7 @@ package com.boleg.crud_pro.dao;
 
 import com.boleg.crud_pro.entity.User;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
-
-
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

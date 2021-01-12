@@ -2,7 +2,7 @@ package com.boleg.crud_pro.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-//Класс для инициализации диспатчер сервлета
+
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override

@@ -14,12 +14,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-// Клас-контроллер функций администратора
 
 @Controller
 public class AdminController {
-
-    //связывание через конструктор с сервисами User и Role
 
     private final UserService userService;
     private final RoleService roleService;

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-//Контроллер для всех залогиненных пользователей (страница all)
-
 @Controller
 @RequestMapping("/all")
 public class UserController {

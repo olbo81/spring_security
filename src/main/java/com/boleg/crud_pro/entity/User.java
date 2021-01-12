@@ -1,6 +1,5 @@
 package com.boleg.crud_pro.entity;
 
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,10 +8,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-// Для того, чтобы в дальнейшим использовать класс User в Spring Security, он должен реализовывать интерфейс UserDetails.
-// UserDetails можно представить, как адаптер между БД пользователей и тем, что требуется для Spring Security
-// внутри SecurityContextHolder
 
 @Entity
 @Table(name = "users")
@@ -58,7 +53,6 @@ public class User implements UserDetails {
         this.password = password;
         this.roles = roles;
     }
-
 
 
     public int getId() {

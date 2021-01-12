@@ -1,7 +1,6 @@
 package com.boleg.crud_pro.dao;
 
 import com.boleg.crud_pro.entity.Role;
-import com.boleg.crud_pro.entity.User;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 

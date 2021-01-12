@@ -17,9 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // сервис, с помощью которого получаем пользователя из бд
     private final UserDetailsService userDetailsService;
-    // класс, в котором описана логика перенаправления пользователей согласно ролям
     private final LoginSuccessHandler successUserHandler;
 
     @Autowired
@@ -30,7 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // конфигурация для прохождения аутентификации: берем данные для аутентификации из бд с помощью UserDetailsService
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
@@ -38,41 +35,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                // включаем требование об авторизованности пользователей для осуществления любых запросов
+
                 .authorizeRequests()
-                //страница аутентификации и страница приветствия доступны всем
                 .antMatchers("/login").anonymous()
-                // защищенные URL
                 .antMatchers("/admin/**")
                 .access("hasRole('ADMIN')")
                 .antMatchers("/all").access("hasAnyRole('ADMIN', 'USER')")
                 .anyRequest().authenticated()
-
-                // указываем страницу с формой логина
                 .and()
+
                 .formLogin().loginPage("/login")
-                //указываем логику обработки при логине
                 .successHandler(new LoginSuccessHandler())
-                // указываем action с формы логина
                 .loginProcessingUrl("/login")
-                // Указываем параметры логина и пароля с формы логина
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
-                // даем доступ к форме логина всем
                 .permitAll()
+
                 .and()
                 .logout()
-                // разрешаем делать логаут всем
                 .permitAll()
-                // указываем URL логаута
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                // указываем URL при удачном логауте
                 .logoutSuccessUrl("/login?logout")
-                //выключаем кроссдоменную секьюрность (на этапе обучения неважна)
-                .and().csrf().disable();
+                .and()
+                .csrf().disable();
     }
 
-    // Необходимо для шифрования паролей
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
