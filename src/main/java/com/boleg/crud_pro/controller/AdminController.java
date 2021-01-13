@@ -16,6 +16,7 @@ import java.util.Set;
 
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
     private final UserService userService;
@@ -36,7 +37,7 @@ public class AdminController {
         return "all-users";
     }
 
-    @RequestMapping("/admin")
+    @RequestMapping("/all-users")
     public String showAllUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("allUsers", allUsers);
@@ -58,7 +59,7 @@ public class AdminController {
         }
         user.setRoles(roleSet);
         userService.saveUser(user);
-        return "redirect:/admin";
+        return "redirect:/admin/all-users";
     }
 
     @RequestMapping("/updateInfo/{id}")
@@ -71,6 +72,6 @@ public class AdminController {
     @RequestMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUser(id);
-        return "redirect:/admin";
+        return "redirect:/admin/all-users";
     }
 }
