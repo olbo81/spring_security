@@ -37,21 +37,21 @@ public class AdminController {
         return "all-users";
     }
 
-    @RequestMapping("/all-users")
+    @GetMapping("/all-users")
     public String showAllUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("allUsers", allUsers);
         return "all-users";
     }
 
-    @RequestMapping("/addNewUser")
+    @GetMapping("/addNewUser")
     public String addNewUser(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("rolesNames", roleService.getAllRoles());
         return "user-info";
     }
 
-    @RequestMapping("/saveUser")
+    @GetMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user, @RequestParam(value = "rolesNames") String[] roles) {
         Set<Role> roleSet = new HashSet<>();
         for (String roleName : roles) {
@@ -62,14 +62,14 @@ public class AdminController {
         return "redirect:/admin/all-users";
     }
 
-    @RequestMapping("/updateInfo/{id}")
+    @GetMapping("/updateInfo/{id}")
     public String updateUser(@PathVariable("id") int id, Model model) {
-        model.addAttribute("rolesNames", roleService.getAllRoles());
         model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("rolesNames", roleService.getAllRoles());
         return "user-info";
     }
 
-    @RequestMapping("/deleteUser/{id}")
+    @GetMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUserById(id);
         return "redirect:/admin/all-users";
