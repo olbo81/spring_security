@@ -1,6 +1,7 @@
 package com.boleg.crud_pro.service;
 
 import com.boleg.crud_pro.dao.UserDAO;
+import com.boleg.crud_pro.entity.Role;
 import com.boleg.crud_pro.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,18 +11,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
     private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
     @Autowired
-    public UserServiceImpl(UserDAO userDAO, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserDAO userDAO, PasswordEncoder passwordEncoder, RoleService roleService) {
         this.userDAO = userDAO;
         this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     @Override
@@ -32,20 +37,37 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public User saveUser(User user, String[] roles) {
+        if(user.getId() != null) {
+            User oldUser = getUserById(user.getId());
+            if(user.getPassword() == null) {
+                user.setPassword(oldUser.getPassword());
+                System.out.println("Пароль не изменился");
+            } else {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                System.out.println("Пароль изменился");
+            }
+        } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        Set<Role> roleSet = new HashSet<>();
+        for (String roleName : roles) {
+            roleSet.add(roleService.getByRoleName(roleName));
+        }
+        user.setRoles(roleSet);
         userDAO.saveUser(user);
+        return user;
     }
 
     @Override
     @Transactional
-    public User getUserById(int id) {
+    public User getUserById(Long id) {
         return userDAO.getUserById(id);
     }
 
     @Override
     @Transactional
-    public void deleteUserById(int id) {
+    public void deleteUserById(Long id) {
         userDAO.deleteUserById(id);
     }
 

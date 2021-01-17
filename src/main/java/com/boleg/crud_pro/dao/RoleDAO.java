@@ -9,9 +9,9 @@ public interface RoleDAO {
 
     public void saveRole(Role role);
 
-    public void deleteRoleById(int id);
+    public void deleteRoleById(Long id);
 
-    public Role getRoleById(int id);
+    public Role getRoleById(Long id);
 
     public Role getByRoleName(String roleName);
 }
