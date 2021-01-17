@@ -9,9 +9,9 @@ public interface RoleService {
 
     public void saveRole(Role role);
 
-    public void delete(int id);
+    public void deleteRoleById(int id);
 
-    public Role getById(int id);
+    public Role getRoleById(int id);
 
     public Role getByRoleName(String roleName);
 }

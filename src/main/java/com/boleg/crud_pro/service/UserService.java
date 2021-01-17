@@ -10,10 +10,10 @@ public interface UserService {
 
     public void saveUser(User user);
 
-    public User getUser(int id);
+    public User getUserById(int id);
 
-    public void deleteUser(int id);
+    public void deleteUserById(int id);
 
-    public User getByEmail(String email);
+    public User getUserByEmail(String email);
 
 }

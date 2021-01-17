@@ -28,12 +28,12 @@ public class RoleDAOImpl implements RoleDAO {
     }
 
     @Override
-    public void delete(int id) {
+    public void deleteRoleById(int id) {
         entityManager.remove(entityManager.find(Role.class, id));
     }
 
     @Override
-    public Role getById(int id) {
+    public Role getRoleById(int id) {
         TypedQuery<Role> query = entityManager.createQuery(
                 "SELECT role FROM Role role WHERE role.id = :id", Role.class);
         return query

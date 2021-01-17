@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping
     public String user(Principal principal, Model model) {
         String email = principal.getName();
-        User user = userService.getByEmail(email);
+        User user = userService.getUserByEmail(email);
         model.addAttribute("user", user);
         return "one-user";
     }

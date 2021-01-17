@@ -31,7 +31,7 @@ public class AdminController {
     @GetMapping
     public String user(Principal principal, Model model) {
         String email = principal.getName();
-        User admin = userService.getByEmail(email);
+        User admin = userService.getUserByEmail(email);
         model.addAttribute("admin", admin);
         model.addAttribute("roles", admin.getRoles());
         return "all-users";
@@ -65,13 +65,13 @@ public class AdminController {
     @RequestMapping("/updateInfo/{id}")
     public String updateUser(@PathVariable("id") int id, Model model) {
         model.addAttribute("rolesNames", roleService.getAllRoles());
-        model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "user-info";
     }
 
     @RequestMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") int id) {
-        userService.deleteUser(id);
+        userService.deleteUserById(id);
         return "redirect:/admin/all-users";
     }
 }

@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userDAO.getByEmail(email);
+        User user = userDAO.getUserByEmail(email);
         System.out.println(user);
         if (user == null) {
             throw new UsernameNotFoundException("User is unknown");

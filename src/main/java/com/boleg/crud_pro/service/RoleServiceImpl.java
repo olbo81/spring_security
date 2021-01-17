@@ -33,14 +33,14 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
-    public void delete(int id) {
-        roleDAO.delete(id);
+    public void deleteRoleById(int id) {
+        roleDAO.deleteRoleById(id);
     }
 
     @Override
     @Transactional
-    public Role getById(int id) {
-        return roleDAO.getById(id);
+    public Role getRoleById(int id) {
+        return roleDAO.getRoleById(id);
     }
 
     @Override
