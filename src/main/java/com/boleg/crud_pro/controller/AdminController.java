@@ -53,24 +53,19 @@ public class AdminController {
 
     @GetMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user, @RequestParam(value = "rolesNames") String[] roles) {
-        Set<Role> roleSet = new HashSet<>();
-        for (String roleName : roles) {
-            roleSet.add(roleService.getByRoleName(roleName));
-        }
-        user.setRoles(roleSet);
-        userService.saveUser(user);
+        userService.saveUser(user, roles);
         return "redirect:/admin/all-users";
     }
 
     @GetMapping("/updateInfo/{id}")
-    public String updateUser(@PathVariable("id") int id, Model model) {
+    public String updateUser(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         model.addAttribute("rolesNames", roleService.getAllRoles());
         return "user-info";
     }
 
     @GetMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
+    public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
         return "redirect:/admin/all-users";
     }

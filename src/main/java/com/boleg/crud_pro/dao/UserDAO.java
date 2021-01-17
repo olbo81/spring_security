@@ -10,9 +10,9 @@ public interface UserDAO {
 
     public void saveUser(User user);
 
-    public User getUserById(int id);
+    public User getUserById(Long id);
 
-    public void deleteUserById(int id);
+    public void deleteUserById(Long id);
 
     public User getUserByEmail(String email);
 }
