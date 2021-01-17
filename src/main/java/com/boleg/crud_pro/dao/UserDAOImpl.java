@@ -18,7 +18,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getAllUsers() {
-        List<User> allUsers = entityManager.createQuery("from User", User.class).getResultList();
+        //List<User> allUsers = entityManager.createQuery("from User", User.class).getResultList();
+        List<User> allUsers = entityManager.createQuery("select distinct u from User as u join fetch u.roles", User.class).getResultList();
         return allUsers;
     }
 
@@ -30,7 +31,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User getUserById(Long id) {
         TypedQuery<User> query = entityManager.createQuery(
-                "SELECT users FROM User users WHERE users.id = :id", User.class);
+                "SELECT users FROM User users join fetch users.roles WHERE users.id = :id", User.class);
         return query
                 .setParameter("id", id)
                 .getSingleResult();
