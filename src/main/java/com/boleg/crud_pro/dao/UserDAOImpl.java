@@ -24,8 +24,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void saveUser(User user) {
-        Session session = entityManager.unwrap(Session.class);
-        session.saveOrUpdate(user);
+        entityManager.merge(user);
     }
 
     @Override
