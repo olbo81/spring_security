@@ -1,6 +1,6 @@
 package com.boleg.crud_pro.controller;
 
-import com.boleg.crud_pro.entity.Role;
+
 import com.boleg.crud_pro.entity.User;
 import com.boleg.crud_pro.service.RoleService;
 import com.boleg.crud_pro.service.UserService;
@@ -10,9 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Controller

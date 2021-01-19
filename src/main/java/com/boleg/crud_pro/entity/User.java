@@ -41,7 +41,6 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
-
     public User() {
     }
 
@@ -53,7 +52,6 @@ public class User implements UserDetails {
         this.password = password;
         this.roles = roles;
     }
-
 
     public Long getId() {
         return id;

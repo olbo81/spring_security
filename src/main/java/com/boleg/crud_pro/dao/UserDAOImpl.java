@@ -1,7 +1,6 @@
 package com.boleg.crud_pro.dao;
 
 import com.boleg.crud_pro.entity.User;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,7 +17,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getAllUsers() {
-        //List<User> allUsers = entityManager.createQuery("from User", User.class).getResultList();
         List<User> allUsers = entityManager.createQuery("select distinct u from User as u join fetch u.roles", User.class).getResultList();
         return allUsers;
     }
@@ -35,7 +33,6 @@ public class UserDAOImpl implements UserDAO {
         return query
                 .setParameter("id", id)
                 .getSingleResult();
-
     }
 
     @Override

@@ -5,13 +5,13 @@ import com.boleg.crud_pro.entity.Role;
 import java.util.List;
 
 public interface RoleDAO {
-    public List<Role> getAllRoles();
+    List<Role> getAllRoles();
 
-    public void saveRole(Role role);
+    void saveRole(Role role);
 
-    public void deleteRoleById(Long id);
+    void deleteRoleById(Long id);
 
-    public Role getRoleById(Long id);
+    Role getRoleById(Long id);
 
-    public Role getByRoleName(String roleName);
+    Role getByRoleName(String roleName);
 }

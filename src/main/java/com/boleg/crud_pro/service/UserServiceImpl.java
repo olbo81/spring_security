@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class UserServiceImpl implements UserService  {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserDAO userDAO;
     private final PasswordEncoder passwordEncoder;
@@ -38,9 +38,9 @@ public class UserServiceImpl implements UserService  {
     @Override
     @Transactional
     public User saveUser(User user, String[] roles) {
-        if(user.getId() != null) {
+        if (user.getId() != null) {
             User oldUser = getUserById(user.getId());
-            if(user.getPassword() == null) {
+            if (user.getPassword().equals("") || user.getPassword() == null ) {
                 user.setPassword(oldUser.getPassword());
                 System.out.println("Пароль не изменился");
             } else {
@@ -74,5 +74,16 @@ public class UserServiceImpl implements UserService  {
     @Override
     public User getUserByEmail(String email) {
         return userDAO.getUserByEmail(email);
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userDAO.getUserByEmail(email);
+        System.out.println(user);
+        if (user == null) {
+            throw new UsernameNotFoundException("User is unknown");
+        }
+        return user;
     }
 }
