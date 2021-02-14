@@ -25,7 +25,7 @@
         Password <input type="text" name= "password"/>
         <br><br>
 
-        <select multiple size="2" name="rolesNames" th:required="true">
+        <select multiple size="4" name="rolesNames" th:required="true">
             <option value=""> - Select role - </option>
             <option
                     th:each="role : ${rolesNames}"
